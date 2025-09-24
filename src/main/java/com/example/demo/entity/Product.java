@@ -3,6 +3,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.util.*;
 
 @Entity
 public class Product {
@@ -30,8 +32,18 @@ public class Product {
     }
 
     @ManyToMany
-    
+    @JoinTable(
+        name = "product_category",
+        joinColumns = @JoinColumn(name = "product_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Category> categories = new HashSet<>();
 
+    public Set<Category> getCategories() {
+        return categories;
+    }
 
-
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
 }

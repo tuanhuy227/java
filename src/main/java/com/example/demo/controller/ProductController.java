@@ -3,6 +3,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.demo.service.ProductService;
 import com.example.demo.entity.Product;
 import java.util.List;
+import com.example.demo.dto.ProductDTO;
 
 @RestController
 @RequestMapping("/products")
@@ -26,13 +27,13 @@ public class ProductController {
 
 
     @PostMapping
-    public Product create(@RequestBody Product product) {
-        return productService.save(product);
+    public Product create(@RequestBody ProductDTO dto) {
+        return productService.create(dto);
     }
-
+ 
     @PutMapping("/{id}")
-    public Product update(@PathVariable Long id, @RequestBody Product product) {
-        return productService.update(id, product);
+    public Product update(@PathVariable Long id, @RequestBody ProductDTO dto) {
+        return productService.update(id, dto);
     }
 
     @DeleteMapping("/{id}")
